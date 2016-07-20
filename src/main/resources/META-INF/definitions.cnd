@@ -1,0 +1,40 @@
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+<mimix = 'http://www.jahia.org/mike/mix/1.0'>
+<mint = 'http://www.jahia.org/mike/nt/1.0'>
+<mix = 'http://www.jcp.org/jcr/mix/1.0'>
+
+[mint:car] > jnt:content, mimix:carCategory
+ - model (string)
+ - brand (string)
+ - body (string)
+ - exterior (string)
+ - interior (string, choicelist) < 'Synthetic', 'Wood', 'Leather'
+ - engine (string)
+ - energy (string, choicelist[energies])
+ - doors (string, choicelist) < '3', '5'
+ - transmission (string, choicelist) < 'Manual', 'Automatic'
+ - kms (long)
+ - year (date, datepicker)
+ - price (double)
+ - photos (weakreference, picker[type='image']) multiple
+ + * (mint:carTest)
+
+[mint:carTest] > jnt:content, mimix:carCategory
+ - date (date)
+ - email (string)
+ - comment (string)
+
+[mimix:carCategory] > jmix:droppableContent, mix:title mixin
+
+[mint:carMaker] > jnt:content, mimix:carCategory
+ + * (mint:car)
+
+[mint:lastAddedCars] > jnt:content, mimix:carCategory, jmix:list
+ - maxNumber (long) = '3'
+
+[mint:lastRequestedTests] > jnt:content, mimix:carCategory, jmix:list
+ - maxNumber (long) = '3'
+
+[mint:availableBrands] > jnt:content, mimix:carCategory, jmix:list
+
